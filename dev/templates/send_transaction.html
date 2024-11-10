@@ -1,0 +1,68 @@
+{% extends "allforms.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg ">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center">Send Transaction</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            <label for="bank_account" class="form-label">{{ form.bank_account.label }}</label>
+                            {{ form.bank_account(class="form-control", placeholder="Enter bank account") }}
+                            {% for error in form.bank_account.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">{{ form.description.label }}</label>
+                            {{ form.description(class="form-control", placeholder="Enter description") }}
+                            {% for error in form.description.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="mb-3">
+                            <label for="account_reciver" class="form-label">{{ form.account_reciver.label }}</label>
+                            {{ form.account_reciver(class="form-control", placeholder="Enter receiver's account") }}
+                            {% for error in form.account_reciver.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="form-label">{{ form.amount.label }}</label>
+                            {{ form.amount(class="form-control", placeholder="Enter amount") }}
+                            {% for error in form.amount.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="text-center">
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{%block footer%}
+<footer class="footer bg-dark text-white mt-auto py-4">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-0">&copy; 2023 Virtualbank. All rights reserved.</p>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#" class="text-white">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="#" class="text-white">Terms & Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock footer %}

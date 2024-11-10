@@ -1,0 +1,61 @@
+{% extends "dashboard.html" %}
+
+{% block loanResult %}
+
+<!-- Loan Result -->
+<div class="{{'tab-pane show active fade p-3' if active_tab=='loan_result' else 'tab-pane fade p-3'}}" id="nav-loan-result"
+    role="tabpanel" aria-labelledby="nav-loan-result-tab" style="height: 500px;">
+    
+    {%for loan in loans%}
+    {% if loan.resultat=='1' %}
+        <h4>Loan Approved!</h4>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th scope="row">Account_number:</th>
+                    <td>{{ loan.account_number }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Amount:</th>
+                    <td>{{ loan.amount }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Interest Rate:</th>
+                    <td>{{ loan.interest }}%</td>
+                </tr>
+                <tr>
+                    <th scope="row">Term:</th>
+                    <td>{{ loan.duration }} days </td>
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <h4>Loan Rejected</h4>
+        <p>Reason for Rejection: bla bla</p>
+        <table class="table ">
+            <tbody>
+                <tr>
+                    <th scope="row">Account_number:</th>
+                    <td>{{ loan.account_number }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Amount:</th>
+                    <td>{{ loan.amount }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Interest Rate:</th>
+                    <td>{{ loan.interest }}%</td>
+                </tr>
+                <tr>
+                    <th scope="row">Term:</th>
+                    <td>{{ loan.duration }} months</td>
+                </tr>
+            </tbody>
+    {% endif %}
+    
+{%endfor%}
+</div>
+
+{% endblock loanResult %}
+{%block footer%}
+{% endblock footer %}

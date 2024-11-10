@@ -1,0 +1,89 @@
+{% extends "allforms.html" %}
+{% block content %}
+<style>
+    /* Custom CSS for form styling */
+    .form-wrapper {
+        max-width: 500px; /* Increase the maximum width for the form wrapper */
+        margin: 0 auto; /* Center the form horizontally */
+        padding: 20px; /* Add some padding around the form */
+        background-color: #f8f9fa; /* Add a light background color to the form */
+        border-radius: 5px; /* Round the corners of the form */
+        box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Add a subtle shadow to the form */
+        margin-top: 45px;
+    }
+
+    .form-group {
+        margin-bottom: 25px; /* Increase margin between form groups */
+    }
+
+    .form-control-label {
+        font-weight: bold; /* Keep form labels bold */
+        color: #495057; /* Darken the color of the form labels for better contrast */
+    }
+
+    .btn-submit {
+        background-color: #007bff; /* Keep the background color for the submit button */
+        color: #fff; /* Keep the text color for the submit button */
+        border-color: #007bff; /* Keep the border color for the submit button */
+        transition: background-color 0.3s ease; /* Keep the transition effect */
+        padding: 10px 20px; /* Increase the padding of the button for a larger click area */
+        font-size: 18px; /* Increase the font size of the button text */
+    }
+
+    .btn-submit:hover {
+        background-color: #529be9; /* Change background color on hover */
+        border-color: #489ce53e; /* Change border color on hover */
+    }
+
+    .invalid-feedback {
+        color: #dc3545; /* Keep the color for invalid feedback messages */
+        font-weight: bold; /* Make invalid feedback messages bold */
+    }
+</style>
+
+<div class="container my-5  ">
+    <div class="form-wrapper">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Password Reset</legend>
+
+                <div class="form-group">
+                    {{ form.email.label(class='form-control-label') }}
+                    {% if form.email.errors %}
+                    {{ form.email(class='form-control form-control-lg is-invalid') }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class='form-control form-control-lg') }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group my-3">
+                    {{ form.submit(class='btn btn-submit') }}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+{% block footer %}
+<footer class="footer bg-dark text-white mt-auto py-4">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-0">&copy; 2023 Virtualbank. All rights reserved.</p>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#" class="text-white">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="#" class="text-white">Terms & Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock footer %}

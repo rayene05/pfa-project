@@ -1,0 +1,36 @@
+{% extends "allforms.html" %}
+{% block content %}
+<!-- Tabs -->
+<div class="container my-5">
+    <nav>
+        <div class="nav nav-tabs" id="tablist">
+            <a class="link" href="/dashboard/profile">
+                <button class="{{ 'nav-link active' if active_tab == 'profile' else 'nav-link' }}" id="nav-profile-tab"
+                        data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab"
+                        aria-controls="nav-profile" aria-selected="true">Profile</button>
+            </a>
+
+            <a class="link" href="/dashboard/choose_bank_account">
+                <button class="{{ 'nav-link active' if active_tab == 'choose_bank_account' else 'nav-link' }}" id="nav-choose_bank_account-tab"
+                        data-bs-toggle="tab" data-bs-target="#nav-choose_bank_account" type="button" role="tab"
+                        aria-controls="nav-choose_bank_account" aria-selected="true">Choose Bank Account</button>
+            </a>
+            <a class="link" href="/dashboard/loanResult">
+                <button class="{{ 'nav-link active' if active_tab == 'loan_result' else 'nav-link' }}" id="nav-loan_result-tab"
+                        data-bs-toggle="tab" data-bs-target="#nav-loan_result" type="button" role="tab"
+                        aria-controls="nav-loan_result" aria-selected="true">my loan resultat</button>
+            </a>
+        </div>
+    </nav>
+    <!-- Tab contents here -->
+    <div class="tab-content" id="nav-tabContent">
+        <!-- profile -->
+        {% block profile %} {% endblock profile%}
+        <!-- bank account-->
+        {% block choose_bank_account %} {% endblock choose_bank_account %}
+        <!--loans-->
+        {% block loanResult %} {% endblock loanResult %}
+
+    </div>
+</div>
+{% endblock content %}

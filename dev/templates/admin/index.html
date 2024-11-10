@@ -1,0 +1,69 @@
+{%extends 'admin/master.html'%}
+{%block head_css%}
+   {{super()}}
+{%endblock head_css%}
+
+{% block head %}
+<style>
+    body {
+    
+        background: linear-gradient(to right,#2c637e, #000033); /* Dark blue gradient */
+        height: 100vh;
+        margin: 0;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .animatedMessage {
+        font-size: 2em;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .navbar{
+        background: linear-gradient(to right,#2c637e, #000033) !important;
+    }
+</style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+{% endblock %}
+{%block body%}
+<div id="animatedMessage" class="animatedMessage"></div>
+    <script>
+        var message = 'Hello, Admin!';
+        var i = 0;
+        function typeMessage() {
+            if (i < message.length) {
+                document.getElementById('animatedMessage').innerHTML += message.charAt(i);
+                i++;
+                setTimeout(typeMessage, 500); // Adjust speed here
+            }
+        }
+        typeMessage();
+    </script>
+
+
+  
+
+{%endblock%}
+{% block tail_js %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+{% endblock tail_js %}
+

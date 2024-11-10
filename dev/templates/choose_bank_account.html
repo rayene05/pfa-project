@@ -1,0 +1,77 @@
+{% extends "dashboard.html" %}
+
+{% block choose_bank_account %}
+    <section>
+        <h2>Your bank accounts</h2>
+        
+        <!-- Display each account in a styled box with a link -->
+        {% for account in bank_accounts %}
+            <div class="account-box">
+                <h3><i class="bi bi-person-fill"></i> {{ account.client_name }}</h3>
+                <p><i class="bi bi-credit-card-fill"></i> Numéro de compte : {{ account.account_number }}</p>
+                <p><i class="bi bi-arrow-down-right-circle-fill"></i> Upcoming : {{ account.upcomming }}</p>
+                <p><i class="bi bi-wallet-fill"></i> Balance : <span class="{{ 'balance-positive' if account.balance >= 0.0 else 'balance-negative' }}">{{ account.balance }}DT</span></p>
+
+                <!-- Add more details as needed -->
+                <div class="account-details">
+                    <a href="{{ url_for('transactions_bp.display_account', uuid=account.uuid, years=years, month =month) }}">
+                        <i class="bi bi-box-arrow-in-right"></i> Accéder au compte
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+    <style>
+        .account-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            background-color: whitesmoke;
+            text-align: left; /* Reset text alignment to left */
+        }
+      
+    
+        .account-box:hover {
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+        }
+
+        .account-details {
+            text-align: right; /* Align the button to the right */
+            margin-top: 10px; /* Increase spacing between paragraphs and the button */
+        }
+
+        .account-box h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .account-box p {
+            color: #666;
+            margin-bottom: 20px; /* Increase spacing between paragraphs */
+        }
+    
+        .account-box a {
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .account-box a:hover {
+            background-color: #0056b3;
+        }
+        .balance-positive {
+              color: green;
+        }
+
+        .balance-negative {
+            color: red;
+        }
+
+    </style>
+{% endblock choose_bank_account %}

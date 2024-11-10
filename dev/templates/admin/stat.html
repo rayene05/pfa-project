@@ -1,0 +1,150 @@
+{%extends 'admin/master.html'%}
+{%block head_css%}
+   {{super()}}
+{%endblock head_css%}
+{% block head %}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+{% endblock %}
+{%block body%}
+
+<div class="col-xs-10 col-sm-6 col-md-6">
+    <div class="card card-style mb-2">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-10 col-sm-6 col-md-6">
+    <div class="card card-style mb-2">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+                <canvas id="ageChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xs-10 col-sm-6 col-md-6">
+    <div class="card card-style mb-2">
+        <div class="card-body">
+            <div class="chart-container" style="position: relative;">
+                <canvas id="userClientChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+ 
+
+{%endblock%}
+{% block tail_js %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></script>
+<script>
+    console.log({{loans_per_months}});
+    
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{months}}, // This should be 'labels' instead of 'data'
+            datasets: [{
+                label: 'Nombre de prêts',
+                data: {{loans_per_months}},
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    })
+let ctx1= document.getElementById('ageChart').getContext('2d');
+
+let data = {
+    labels: ['18-30', '31-40', '41-60', '61+'],
+    datasets: [{
+        data:[{{nbtransaction_18}},{{nbtransaction_30}},{{nbtransaction_40}},{{nbtransaction_60}}] , // replace these values with your actual data
+        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+        borderWidth: 1
+    }]
+};
+
+let options = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Age Distribution'
+    }
+};
+
+let myPieChart = new Chart(ctx1, {
+    type: 'pie',
+    data: data,
+    options: options
+})
+
+let user_client = document.getElementById('userClientChart').getContext('2d');
+console.log({{nb_user}})
+console.log({{nb_client}})
+let data1 = {
+    labels: ['Users', 'Clients'],
+    datasets: [{
+        label: '# of Users and Clients',
+        data: [{{nb_user}},{{nb_client}}], // replace these values with your actual data
+        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 206, 86, 1)'],
+        borderWidth: 1
+    }]
+};
+
+let options1 = {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'User vs Client Comparison'
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    }
+};
+
+let myBarChart = new Chart(user_client, {
+    type: 'bar',
+    data: data1,
+    options: options1
+});
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+{% endblock tail_js %}

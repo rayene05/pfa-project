@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Bank </title>
+
+    <!-- Linking CSS File  -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
+
+    <!-- Bootstrap CSS  -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.2.1/css/bootstrap.min.css">
+
+    <!-- Fontawesome Icons  -->
+    <script
+      src="https://kit.fontawesome.com/7433d3320f.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body data-bs-spy="scroll" data-bs-target="#navbarSupportedContent">
+    <header>
+      <!-- Navbar Section  -->
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">VirtualbanK</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#discover">Discover</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#service">Service</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#signup">Sign up</a>
+              </li>
+            </ul>
+            {%if current_user.is_authenticated %}
+            <a href="{{ url_for('users.dashboard') }}">
+              <button class="btn btn-success text-white" type="submit">Dashboard</button>
+            </a>
+            {%else%}
+            <a href="{{ url_for('users.login1') }}">
+              <button class="btn btn-success text-white" type="submit">Sign In</button>
+            </a>
+            {%endif%}
+             
+          </div>
+        </div>
+      </nav>
+
+      {% block content %}
+      <!-- Ici, vous mettez le contenu de votre page -->
+      {% endblock %}
+    <!-- Footer Section  -->
+    <footer class="bg-dark text-center text-white">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="#!"
+            role="button"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+
+          <!-- Twitter -->
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="#!"
+            role="button"
+            ><i class="fab fa-twitter"></i
+          ></a>
+
+          <!-- Instagram -->
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="#!"
+            role="button"
+            ><i class="fab fa-instagram"></i
+          ></a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2024 Copyright:
+        <a class="text-white" href="#"
+          >vritualbanK</a
+        >
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+    <!-- Bootstrap JavaScript  -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

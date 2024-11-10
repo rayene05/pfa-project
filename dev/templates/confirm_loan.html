@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% if show_modal %}
+<!-- Modal for Loan Confirmation -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirm Loan Request</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to submit this loan request?</p>
+                <p>Account Number: {{ loan_request.account_number }}</p>
+                <p>loan interest: {{ loan_request.interest }}</p>
+                <p>Loan Amount: {{ loan_request.amount }}</p>
+                <p>Loan Duration: {{ loan_request.duration  //30}} months</p>
+                <p>Monthly payment:{{ loan_request.payment }}</p>
+                <!-- Add any relevant information you want to display here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeButton">Close</button>
+                <form id="confirmForm" action="" method="POST">
+                    {{ confirm_form.hidden_tag() }}
+                    {{ confirm_form.submit(class='btn btn-outline-info') }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+     $(document).ready(function(){
+        $("#confirmModal").modal('show');
+        $("#closeButton").click(function(){
+            window.location.href = "{{ url_for('loans.simulate_credit') }}";
+        });
+    });
+</script>
+{% endif %}
+</body>
+</html>
